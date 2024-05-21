@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-package av.hw;
-option go_package="ayuved/av/av/pb";
+package av.ms;
+option go_package="ayuved/av/ms/pb";
 
 service Greeter {
   rpc Hello (HelloRequest) returns (HelloReply) {}

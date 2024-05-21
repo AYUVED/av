@@ -42,11 +42,11 @@ func GreeterService_Hello_Handler(svr interface{}, ctx context.Context, f server
 
 // GreeterServer_ServiceDesc descriptor for server.RegisterService.
 var GreeterServer_ServiceDesc = server.ServiceDesc{
-	ServiceName: "av.hw.Greeter",
+	ServiceName: "av.ms.Greeter",
 	HandlerType: ((*GreeterService)(nil)),
 	Methods: []server.Method{
 		{
-			Name: "/av.hw.Greeter/Hello",
+			Name: "/av.ms.Greeter/Hello",
 			Func: GreeterService_Hello_Handler,
 		},
 	},
@@ -90,7 +90,7 @@ var NewGreeterClientProxy = func(opts ...client.Option) GreeterClientProxy {
 func (c *GreeterClientProxyImpl) Hello(ctx context.Context, req *HelloRequest, opts ...client.Option) (*HelloReply, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/av.hw.Greeter/Hello")
+	msg.WithClientRPCName("/av.ms.Greeter/Hello")
 	msg.WithCalleeServiceName(GreeterServer_ServiceDesc.ServiceName)
 	msg.WithCalleeApp("")
 	msg.WithCalleeServer("")
