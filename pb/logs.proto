@@ -1,0 +1,22 @@
+syntax = "proto3";
+package logs;
+
+option go_package = "github.com/ayuved/av/pb/logs";
+
+// LogRequest is Log request.
+message LogRequest {
+  string app = 1;
+  string name = 2;
+  string data = 3;
+}
+
+// LogResponse is Log response.
+message LogResponse {
+  string msg = 1;
+}
+
+// LogService handles Log request and echo message.
+service LogService {
+  // Log says Log.
+  rpc Log(LogRequest) returns(LogResponse);
+}

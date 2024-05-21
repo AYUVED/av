@@ -1,6 +1,6 @@
 all:
 	trpc create \
-		-p hw.proto \
+		-p logs.proto \
 		--rpconly \
 		--nogomod \
 		--mock=false \

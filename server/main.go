@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"AYUVED/av/pb"
+	"github.com/AYUVED/av/pb"
 
 	trpc "trpc.group/trpc-go/trpc-go"
 	"trpc.group/trpc-go/trpc-go/log"
