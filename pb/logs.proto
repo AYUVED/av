@@ -1,7 +1,7 @@
 syntax = "proto3";
-package logs;
+package av.ms;
 
-option go_package = "github.com/ayuved/av/pb/logs";
+option go_package = "github.com/ayuved/av/pb";
 
 // LogRequest is Log request.
 message LogRequest {
