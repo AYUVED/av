@@ -65,19 +65,19 @@ func (app *Config) Broker(w http.ResponseWriter, r *http.Request) {
 // payload and performs an action based on the value of "action" in that JSON.
 func (app *Config) HandleSubmission(w http.ResponseWriter, r *http.Request) {
 	var requestPayload RequestPayload
-
+	log.Infof("HandleSubmission")
 	err := app.readJSON(w, r, &requestPayload)
 	if err != nil {
 		app.errorJSON(w, err)
 		return
 	}
-
+	log.Infof("requestPayload: %v", requestPayload.Action)
 	switch requestPayload.Action {
 	case "auth":
 		app.authenticate(w, requestPayload.Auth)
 	case "log":
 		// app.logItemViaRPC(w, requestPayload.Log)
-		app.LogViaGRPC(w, r)
+		app.LogViaGRPC(w, requestPayload.Log)
 	case "mail":
 		app.sendMail(w, requestPayload.Mail)
 	default:
@@ -285,14 +285,15 @@ func (app *Config) logItemViaRPC(w http.ResponseWriter, l LogPayload) {
 	app.writeJSON(w, http.StatusAccepted, payload)
 }
 
-func (app *Config) LogViaGRPC(w http.ResponseWriter, r *http.Request) {
-	var requestPayload RequestPayload
-
-	err := app.readJSON(w, r, &requestPayload)
-	if err != nil {
-		app.errorJSON(w, err)
-		return
-	}
+func (app *Config) LogViaGRPC(w http.ResponseWriter, l LogPayload) {
+	// var requestPayload RequestPayload
+	log.Infof("LogViaGRPC")
+	// err := app.readJSON(w, r, &requestPayload)
+	// if err != nil {
+	// 	app.errorJSON(w, err)
+	// 	return
+	// }
+	log.Infof("requestPayload: %v", l.Name, l.Data)
 	proxy := pb.NewLogServiceClientProxy(client.WithTarget("ip://127.0.0.1:8000"))
 	// rsp, err := c.Hello(context.Background(), &pb.HelloRequest{Msg: "world"})
 
@@ -302,7 +303,9 @@ func (app *Config) LogViaGRPC(w http.ResponseWriter, r *http.Request) {
 	// )
 	// ctx := trpc.BackgroundContext()
 	// // Example usage of unary client.
-	reply, err := proxy.Log(context.Background(), &pb.LogRequest{App: "app", Name: "level", Data: "message123"})
+	reply, err := proxy.Log(context.Background(), &pb.LogRequest{App: "applog",
+		Name: l.Name,
+		Data: l.Data})
 	if err != nil {
 		log.Fatalf("err: %v", err)
 	}
