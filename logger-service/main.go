@@ -5,7 +5,8 @@ import (
 
 	"time"
 
-	"av.app.LoggerService/data"
+	"loggerService/data"
+
 	pb "github.com/ayuved/av/pb/logs"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
