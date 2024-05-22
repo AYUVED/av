@@ -1,5 +1,5 @@
 syntax = "proto3";
-package av.ms;
+package logs;
 
 option go_package = "github.com/ayuved/av/pb/logs";
 

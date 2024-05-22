@@ -43,11 +43,11 @@ func LogServiceService_Log_Handler(svr interface{}, ctx context.Context, f serve
 
 // LogServiceServer_ServiceDesc descriptor for server.RegisterService.
 var LogServiceServer_ServiceDesc = server.ServiceDesc{
-	ServiceName: "av.ms.LogService",
+	ServiceName: "logs.LogService",
 	HandlerType: ((*LogServiceService)(nil)),
 	Methods: []server.Method{
 		{
-			Name: "/av.ms.LogService/Log",
+			Name: "/logs.LogService/Log",
 			Func: LogServiceService_Log_Handler,
 		},
 	},
@@ -93,7 +93,7 @@ var NewLogServiceClientProxy = func(opts ...client.Option) LogServiceClientProxy
 func (c *LogServiceClientProxyImpl) Log(ctx context.Context, req *LogRequest, opts ...client.Option) (*LogResponse, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/av.ms.LogService/Log")
+	msg.WithClientRPCName("/logs.LogService/Log")
 	msg.WithCalleeServiceName(LogServiceServer_ServiceDesc.ServiceName)
 	msg.WithCalleeApp("")
 	msg.WithCalleeServer("")
